@@ -56,6 +56,14 @@ CREATE TABLE `etudiants` (
 
 -- --------------------------------------------------------
 
+CREATE TABLE `displayers` (
+  `id` int(11) NOT NULL,
+  `table` varchar(32) NOT NULL,
+  `champ` varchar(64) NOT NULL,
+  `modifie_le` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `cree_le` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Structure de la table `typecontacts`
 --
@@ -85,6 +93,9 @@ ALTER TABLE `contacts`
 ALTER TABLE `etudiants`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `nce` (`nce`);
+
+ALTER TABLE `displayers`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `typecontacts`

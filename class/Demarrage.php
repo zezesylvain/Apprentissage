@@ -15,6 +15,7 @@ class Demarrage
             while ($row = $result->fetch(PDO::FETCH_NUM)) :
                 $table[] = $row[0];
                 self::storeColumnsOfTable($db, $row[0]);
+                self::displayerTable($db, $row[0]);
             endwhile;
             $_SESSION['tables'] = $table;
         endif;
@@ -62,5 +63,13 @@ class Demarrage
         $nomTable = str_replace('_id', 's', $column);
         $type = $_SESSION['columns'][$table][$column]['Type'];
         return in_array($nomTable, $_SESSION['tables']) && str_contains($type, 'int');
+    }
+    public static function displayerTable(PDO $db, string $table)
+    {
+        $sql = "SELECT champ FROM displayers WHERE latable = '$table'";
+        $data = $db->query($sql)->fetchAll();
+        if (!empty($data)) :
+            $_SESSION['displayer'][$table] = $data[0]['champ'];
+        endif;
     }
 }
